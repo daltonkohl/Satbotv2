@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+  <title>Satbot</title>
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/chatScreen.css' %}">
+</head>
+<style>
+  .logo-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-height: 80px;
+  }
+</style>
+
+<body>
+  <img src="{% static 'images/USDLogo.png' %}" alt="USD Logo" class="logo-img">
+  <div class="square-top-left"></div>
+  <div class="square-bottom-right"></div>
+  <header class="bg-primary text-white">
+    <div class="container">
+      <h1></h1>
+    </div>
+  </header>
+  <div class="container my-5">
+    <div id="chatbot-container" style="font-family: 'Product Sans', sans-serif;">
+      <div id="chat-container"></div>
+        <div id="input-container" class="d-flex justify-content-between align-items-center">
+          <input type="text"  placeholder="Type your message..." class="form-control"
+            style="font-family: 'Product Sans', sans-serif;">
+          <button id="send-btn" class="btn btn-primary" style="font-family: 'Product Sans', sans-serif;">Send</button>
+        </div>
+    </div>
+    <button id="logout-btn" onclick="location.href = '{% url 'login' %}'" class="btn btn-outline-primary mt-3"
+      style="font-family: 'Product Sans', sans-serif;">Log Out</button>
+  </div>
+  <footer></footer>
+  <!-- Include Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="{% static 'js/chatScreen.js' %}"></script> 
+
+</body>
+
+</html>

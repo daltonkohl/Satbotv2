@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+torch = "*"
+django-debug-toolbar = "*"
+djangorestframework = "*"
+numpy = "*"
+nltk = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"

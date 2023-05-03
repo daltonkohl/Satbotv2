@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <title>SatBot - Log In</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}" type="text/css">
+</head>
+<style>
+  .logo-img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-height: 80px;
+  }
+
+  .scroll-window {
+    height: 300px;
+    /* set the height of the scroll window */
+    width: 635px;
+    /* set the width of the scroll window */
+    overflow-y: scroll;
+    /* add a scroll bar */
+  }
+
+  .button-container {
+    position: absolute;
+    top: 50%;
+    /* align the button container to the middle */
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .button {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .preview-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 100;
+    width: 400px;
+    display: none;
+  }
+
+  .preview-container h4 {
+    margin-top: 0;
+  }
+
+  .preview-container input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .preview-container button {
+    margin-top: 10px;
+  }
+
+  .edit-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 100;
+    width: 400px;
+    display: none;
+  }
+
+  .edit-container h4 {
+    margin-top: 0;
+  }
+
+  .edit-container input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .edit-container button {
+    margin-top: 10px;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+
+  .scroll-window ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .scroll-window li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+
+  .scroll-window input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  .scroll-window span {
+    flex-grow: 1;
+  }
+
+  .scroll-window button {
+    margin-left: 10px;
+  }
+
+  .top-button {
+    margin-top: 15px;
+    /* Increase the value for more padding */
+    margin-bottom: 15px;
+    /* Increase the value for more padding */
+  }
+
+  .side-button {
+    margin-right: 5px;
+    /* Increase the value for more padding */
+  }
+
+  .logout-bottom-left {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: navy;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .logout-bottom-left:hover {
+    background-color: lightblue;
+  }
+</style>
+
+<body class="bg-light">
+  <button id="logout-btn" onclick="location.href = 'login.html'" class="btn btn-outline-primary mt-3"
+    style="font-family: 'Product Sans', sans-serif;">Log Out</button>
+  <img src="{% static 'images/USDLogo.png' %}" alt="USD Logo" class="logo-img">
+  <div class="square-top-left"></div>
+  <div class="square-bottom-right"></div>
+  <div>
+    <button id="logout-btn" onclick="location.href = '{% url 'login' %}'"
+      class="btn btn-outline-primary mt-3 logout-bottom-left" style="font-family: 'Product Sans', sans-serif;">Log
+      Out</button>
+  </div>
+  <main class="container-fluid mt-5">
+    <div id="overlay"
+      style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;backdrop-filter: blur(8px);z-index:50;">
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card p-4 rounded-lg shadow-sm">
+          <h2 class="card-title text-center mb-4" style="font-family: 'Product Sans', sans-serif;">Professor Portal</h2>
+          <!-- Adding the tab content -->
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="nav nav-pills">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#questionbase" data-toggle="tab"
+                    style="font-family: 'Product Sans', sans-serif;">Question Base</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#missed" data-toggle="tab"
+                    style="font-family: 'Product Sans', sans-serif;">Missed Questions</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#public" data-toggle="tab"
+                    style="font-family: 'Product Sans', sans-serif;">Public Questions</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#classlist" data-toggle="tab"
+                    style="font-family: 'Product Sans', sans-serif;">Class List</a>
+                </li>
+              </ul>
+
+              <div class="tab-content">
+
+                <div id="questionbase" class="tab-pane active container">
+                  <div class="d-flex justify-content-end mb-2">
+                    <button id="add-new-entry" class="btn btn-primary mr-2 top-button"
+                      style="font-family: 'Product Sans', sans-serif;" type="top-submit">Add New
+                      Entry</button>
+                    <button class="btn btn-danger top-button" style="font-family: 'Product Sans', sans-serif;"
+                      type="top-back">Remove
+                      Selection(s)</button>
+                  </div>
+                  <div class="scroll-window">
+                    <ul id="intent-list">
+                      <!-- Add the rest of the items in the same format -->
+                    </ul>
+                  </div>
+                </div>
+
+
+                <div id="missed" class="tab-pane container">
+                  <div class="d-flex justify-content-end mb-2">
+                    <button class="btn btn-danger top-button" style="font-family: 'Product Sans', sans-serif;"
+                      type="top-back">Remove
+                      Selection(s)</button>
+                  </div>
+                  <div class="scroll-window">
+                    <ul>
+                      <li>
+                        <input type="checkbox">
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                        <button class="btn btn-primary btn-xs side-button" onclick="location.href = 'chatPreview.html'"
+                          style="font-family: 'Product Sans', sans-serif;" type="side">Open
+                          Chat Preview</button>
+                      </li>
+                      <li>
+                        <input type="checkbox">
+                        <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</span>
+                        <button class="btn btn-primary btn-xs side-button" onclick="location.href = 'chatPreview.html'"
+                          style="font-family: 'Product Sans', sans-serif;" type="side">Open
+                          Chat Preview</button>
+                      </li>
+                      <!-- Add the rest of the items in the same format -->
+
+                    </ul>
+                  </div>
+                </div>
+
+                <div id="public" class="tab-pane container">
+                  <div class="d-flex justify-content-end mb-2">
+                    <button id="add-new-public-entry" class="btn btn-primary mr-2 top-button"
+                      style="font-family: 'Product Sans', sans-serif;" type="top-submit">Add New Public
+                      Entry</button>
+                    <button class="btn btn-primary mr-2 top-button" style="font-family: 'Product Sans', sans-serif;"
+                      type="top-submit">Add
+                      Selection(s) to Question Base</button>
+                    <button class="btn btn-danger top-button" style="font-family: 'Product Sans', sans-serif;"
+                      type="top-back">Remove
+                      Selection(s)</button>
+                  </div>
+                  <div class="scroll-window">
+                    <ul>
+                      <li>
+                        <input type="checkbox">
+                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                        <button class="btn btn-primary btn-xs side-button edit"
+                          style="font-family: 'Product Sans', sans-serif;" type="side">Edit</button>
+                      </li>
+                      <li>
+                        <input type="checkbox">
+                        <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</span>
+                        <button class="btn btn-primary btn-xs side-button edit"
+                          style="font-family: 'Product Sans', sans-serif;" type="side">Edit</button>
+                      </li>
+                      <!-- Add the rest of the items in the same format -->
+                    </ul>
+                  </div>
+                </div>
+
+                <div id="classlist" class="tab-pane container">
+                  <div class="scroll-window">
+                    <ul>
+                      <li>
+                        <span>Andrew Kirrane</span>
+                        <button class="btn btn-primary btn-xs side-button" onclick="location.href = 'chatPreview.html'"
+                          style="font-family: 'Product Sans', sans-serif;" type="side">View
+                          Chats</button>
+                      </li>
+                      <li>
+                        <span>Dalton Kohl</span>
+                        <button class="btn btn-primary btn-xs side-button" onclick="location.href = 'chatPreview.html'"
+                          style="font-family: 'Product Sans', sans-serif;" type="side">View
+                          Chats</button>
+                      </li>
+                      <li>
+                        <span>Andrea Martinez</span>
+                        <button class="btn btn-primary btn-xs side-button" onclick="location.href = 'chatPreview.html'"
+                          style="font-family: 'Product Sans', sans-serif;" type="side">View
+                          Chats</button>
+                      </li>
+                      <li>
+                        <span>Rodolfo Lopez</span>
+                        <button class="btn btn-primary btn-xs side-button" onclick="location.href = 'chatPreview.html'"
+                          style="font-family: 'Product Sans', sans-serif;" type="side">View
+                          Chats</button>
+                      </li>
+                      <!-- Add the rest of the items in the same format -->
+
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="preview-container" id="preview-container">
+          <h4 style="font-family: 'Product Sans', sans-serif;">Add Q/A Pair</h4>
+          <input type="text" id="add-question-textbox" style="font-family: 'Product Sans', sans-serif;"
+            placeholder="Enter questions here:">
+          <input type="text" id="add-answer-textbox" style="font-family: 'Product Sans', sans-serif;"
+            placeholder="Enter answer here:">
+          <button class="btn btn-primary" id="add-intent-button" style="font-family: 'Product Sans', sans-serif;"
+            type="top-submit">Add</button>
+          <span class="close-button" id="close-button">&times;</span>
+        </div>
+        <div class="edit-container" id="edit-container">
+          <h4 style="font-family: 'Product Sans', sans-serif;">Edit Q/A Pair</h4>
+          <input type="text" style="font-family: 'Product Sans', sans-serif;" placeholder="Enter questions here:">
+          <input type="text" style="font-family: 'Product Sans', sans-serif;" placeholder="Enter answer here:">
+          <button class="btn btn-primary" style="font-family: 'Product Sans', sans-serif;"
+            type="top-submit">Save</button>
+          <span class="close-button" id="edit-close-button">&times;</span>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+
+  <script src="{% static 'js/professor.js' %}"></script>

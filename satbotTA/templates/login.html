@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>SatBot - Log In</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}" type="text/css">
+</head>
+<style>
+    .logo-img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        max-height: 80px;
+    }
+
+    .center-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .card-container {
+        width: 100%;
+    }
+</style>
+
+<body class="bg-light">
+    <img src="{% static 'images/USDLogo.png' %}" alt="USD Logo" class="logo-img">
+    <div class="square-top-left"></div>
+    <div class="square-bottom-right"></div>
+    <div class="center-container">
+        <div class="card-container rounded-lg shadow-sm">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card p-4">
+                        <h2 class="card-title text-center mb-4" style="font-family: 'Product Sans', sans-serif;">Welcome to
+                            SatBot</h2>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username"
+                                style="font-family: 'Product Sans', sans-serif;" required>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password"
+                                style="font-family: 'Product Sans', sans-serif;" required>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="button" id="login-btn" class="btn btn-primary"
+                                style="font-family: 'Product Sans', sans-serif;">Log
+                                In</button>
+                            <form action="chatScreen.html"></form>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p class="mb-0">Don't have an account yet? <a href="{% url 'signup' %}"
+                                    style="font-family: 'Product Sans', sans-serif">Click Here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

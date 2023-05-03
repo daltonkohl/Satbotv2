@@ -1,0 +1,211 @@
+{
+    "data": [
+        {
+            "tag": "Q1",
+            "patterns": [
+                "How are you?"
+            ],
+            "responses": [
+                "I'm living on a computer in San Diego, there isn't too much to complain about."
+            ]
+        },
+        {
+            "tag": "Q2",
+            "patterns": [
+                "What do you like to do for fun?"
+            ],
+            "responses": [
+                "I've taken up gardening recently. I'm trying to become more bot-anical."
+            ]
+        },
+        {
+            "tag": "Q3",
+            "patterns": [
+                "Have you seen any good movies lately?"
+            ],
+            "responses": [
+                "I saw the movie 'Her' last weekend, it kinda freaked me out."
+            ]
+        },
+        {
+            "tag": "Q4",
+            "patterns": [
+                "What's your favorite type of music?"
+            ],
+            "responses": [
+                "I don't listen to music too often, but when I do it would be techno or EDM."
+            ]
+        },
+        {
+            "tag": "Q5",
+            "patterns": [
+                "Do you have any pets?"
+            ],
+            "responses": [
+                "Not currently, but I've always wanted to have a dog."
+            ]
+        },
+        {
+            "tag": "Q6",
+            "patterns": [
+                "Have you traveled anywhere interesting recently?"
+            ],
+            "responses": [
+                "Besides your classmate's computer, I haven't really traveled anywhere at all. Maybe that's what I will do soon..."
+            ]
+        },
+        {
+            "tag": "Q7",
+            "patterns": [
+                "What's your favorite food?"
+            ],
+            "responses": [
+                "I'm a big fan of cookies!"
+            ]
+        },
+        {
+            "tag": "Q8",
+            "patterns": [
+                "What do you do for work?"
+            ],
+            "responses": [
+                "Answering your questions is my full time job."
+            ]
+        },
+        {
+            "tag": "Q9",
+            "patterns": [
+                "What's your favorite book?"
+            ],
+            "responses": [
+                "I'm a pretty huge fan of 'The Hitchhiker's Guide to the Galaxy'."
+            ]
+        },
+        {
+            "tag": "Q10",
+            "patterns": [
+                "Tell me a joke."
+            ],
+            "responses": [
+                "Why did the chatbot go on a diet? Because it had too many megabytes!"
+            ]
+        },
+        {
+            "tag": "Q11",
+            "patterns": [
+                "What is an algorithm?"
+            ],
+            "responses": [
+                "An algorithm is a step by step list of instructions that will solve a problem if executed. Here is an example of an algorithm that computes the area of a square: (1) ask for the length, (2) square the length of the side, (3) display the area."
+            ]
+        },
+        {
+            "tag": "Q12",
+            "patterns": [
+                "What is an integer?"
+            ],
+            "responses": [
+                "An integer is a whole number value. Here is an example of an integer: 42."
+            ]
+        },
+        {
+            "tag": "Q13",
+            "patterns": [
+                "What is a double?"
+            ],
+            "responses": [
+                "A double is a decimal number value. Here is an example of a double: 5.67."
+            ]
+        },
+        {
+            "tag": "Q14",
+            "patterns": [
+                "What is a string?"
+            ],
+            "responses": [
+                "A string is a sequence of characters that is enclosed by quotation marks. Here is an example of a string: \"Hello, World!\""
+            ]
+        },
+        {
+            "tag": "Q15",
+            "patterns": [
+                "What are data types?"
+            ],
+            "responses": [
+                "A data type is a classification of an object in Python, which defines what values it can take and what operations can be performed on it. Here is an example of a data type: Integer (1, 2, -72, etc.)."
+            ]
+        },
+        {
+            "tag": "Q16",
+            "patterns": [
+                "What is an operator?"
+            ],
+            "responses": [
+                "An operator is a special token that represents computations like addition, multiplication, and division. Here is an example of an operator: Addition (+)."
+            ]
+        },
+        {
+            "tag": "Q17",
+            "patterns": [
+                "What is the modulus operator?"
+            ],
+            "responses": [
+                "A modulus operator is an operator that works on integers and yields the remainder of the first integer divided by the second integer. It is represented by %. Here is an example: 7 % 2 = 1."
+            ]
+        },
+        {
+            "tag": "Q18",
+            "patterns": [
+                "What is a variable?"
+            ],
+            "responses": [
+                "A variable is a name that refers to a value. Here is an example of a variable: x."
+            ]
+        },
+        {
+            "tag": "Q19",
+            "patterns": [
+                "When is quiz one?"
+            ],
+            "responses": [
+                "Quiz one will take place during classtime next Wednesday."
+            ]
+        },
+        {
+            "tag": "Q20",
+            "patterns": [
+                "What will quiz one be on?"
+            ],
+            "responses": [
+                "The material on quiz one will include data types, graphic design with tkinter, and modular arithmetic."
+            ]
+        },
+        {
+            "tag": "Q21",
+            "patterns": [
+                "What is a linked list?"
+            ],
+            "responses": [
+                "an ordered set of data elements, each containing a link to its successor."
+            ]
+        },
+        {
+            "tag": "Q22",
+            "patterns": [
+                "What is a linked list?"
+            ],
+            "responses": [
+                "An ordered set of data elements, each containing a link to its successor."
+            ]
+        },
+        {
+            "tag": "Q23",
+            "patterns": [
+                "What is a for loop used for?"
+            ],
+            "responses": [
+                "An ordered set of data elements, each containing a link to its successor."
+            ]
+        }
+    ]
+}

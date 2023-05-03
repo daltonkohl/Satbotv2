@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Product+Sans');
+
+/* Chat screen CSS */
+
+body {
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+}
+
+#chatbot-container {
+    background-color: #fff;
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#chat-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 70px;
+    overflow-y: scroll;
+}
+
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-self: flex-end;
+}
+
+.user-message-container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    align-self: flex-start;
+    max-width: 100%;
+}
+
+
+.message {
+    background-color: rgb(120, 190, 214);
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.user-message {
+    background-color: navy;
+    align-self: flex-end;
+    word-wrap: break-word;
+}
+
+.bot-message {
+    background-color: rgb(120, 190, 214);
+    align-self: flex-start;
+    word-wrap: break-word;
+}
+
+#input-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 40px);
+}
+
+#input-container input[type="text"] {
+    width: calc(85% - 0px);
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#send-btn {
+    width: calc(30% - 150px);
+    background-color: lightblue;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#send-btn:hover {
+    background-color: navy;
+}
+
+/* New CSS code for logout button */
+#logout-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: navy;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+    background-color: lightblue;
+}
+
+.square-top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 37.5%;
+    height: 37.5%;
+    background-color: lightblue;
+  }
+  
+  .square-bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 37.5%;
+    height: 37.5%;
+    border: 2px solid lightblue;
+    border-radius: 10px;
+    opacity: 0.7;
+    background-image: repeating-linear-gradient(-45deg, lightblue, lightblue 2px, #f2f2f2 2px, #f2f2f2 40px);
+}
+
+/* New CSS code for message container and user message container */
