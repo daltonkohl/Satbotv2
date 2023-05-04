@@ -49,12 +49,22 @@ class IncompleteQuestion(models.Model):
 
 class Intent(models.Model):
     #fields
+    INTENT_TYPE_PUBLIC = 'P'
+    INTENT_TYPE_LOCAL = 'L'
+    INTENT_TYPE_CHOICES = [
+        (INTENT_TYPE_PUBLIC, 'Public'),
+        (INTENT_TYPE_LOCAL, 'Local')
+    ]
+
     intent = models.TextField()
     response = models.TextField()
     access_count = models.IntegerField(default=0)
+    intent_type = models.CharField(max_length=1, choices=INTENT_TYPE_CHOICES, default=INTENT_TYPE_LOCAL)
+
 
     #RELATIONSHIPS
     course = models.ForeignKey(Course, on_delete= models.PROTECT, null=True, related_name= 'intents')
+    professor = models.ForeignKey("User", on_delete= models.PROTECT, null=True, related_name= 'intents')
 
     def __str__(self) -> str:
         return self.intent

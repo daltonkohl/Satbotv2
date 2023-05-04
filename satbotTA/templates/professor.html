@@ -210,7 +210,7 @@
                     <button id="add-new-entry" class="btn btn-primary mr-2 top-button"
                       style="font-family: 'Product Sans', sans-serif;" type="top-submit">Add New
                       Entry</button>
-                    <button class="btn btn-danger top-button" style="font-family: 'Product Sans', sans-serif;"
+                    <button id="remove-selections" class="btn btn-danger top-button" style="font-family: 'Product Sans', sans-serif;"
                       type="top-back">Remove
                       Selection(s)</button>
                   </div>
@@ -263,19 +263,7 @@
                       Selection(s)</button>
                   </div>
                   <div class="scroll-window">
-                    <ul>
-                      <li>
-                        <input type="checkbox">
-                        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                        <button class="btn btn-primary btn-xs side-button edit"
-                          style="font-family: 'Product Sans', sans-serif;" type="side">Edit</button>
-                      </li>
-                      <li>
-                        <input type="checkbox">
-                        <span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</span>
-                        <button class="btn btn-primary btn-xs side-button edit"
-                          style="font-family: 'Product Sans', sans-serif;" type="side">Edit</button>
-                      </li>
+                    <ul id="public-intent-list">
                       <!-- Add the rest of the items in the same format -->
                     </ul>
                   </div>
@@ -342,3 +330,4 @@
   </main>
 
   <script src="{% static 'js/professor.js' %}"></script>
+</html>

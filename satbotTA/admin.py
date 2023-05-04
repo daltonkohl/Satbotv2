@@ -29,7 +29,7 @@ class IncompleteQuestionAdmin(admin.ModelAdmin):
 
 @admin.register(models.Intent)
 class IntentAdmin(admin.ModelAdmin):
-    list_display = ['intent', 'course', 'access_count']
+    list_display = ['intent', 'course', 'professor', 'intent_type', 'access_count']
     ordering = ['intent', 'course', 'access_count']
     search_fields = ['intent', 'course__course_title']
 

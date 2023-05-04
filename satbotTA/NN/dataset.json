@@ -183,28 +183,28 @@
         {
             "tag": "Q21",
             "patterns": [
-                "What is a linked list?"
+                "Test Question"
             ],
             "responses": [
-                "an ordered set of data elements, each containing a link to its successor."
+                "Test Answer"
             ]
         },
         {
             "tag": "Q22",
             "patterns": [
-                "What is a linked list?"
+                "Another test"
             ],
             "responses": [
-                "An ordered set of data elements, each containing a link to its successor."
+                "answer"
             ]
         },
         {
             "tag": "Q23",
             "patterns": [
-                "What is a for loop used for?"
+                "Test"
             ],
             "responses": [
-                "An ordered set of data elements, each containing a link to its successor."
+                "TEst123"
             ]
         }
     ]

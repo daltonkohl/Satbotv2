@@ -7,6 +7,7 @@ const addNewPublicEntryButton = document.getElementById("add-new-public-entry");
 const editButtons = document.querySelectorAll(".edit");
 const editContainer = document.getElementById("edit-container");
 const editCloseButton = document.getElementById("edit-close-button");
+const removeSelectionsButton = document.getElementById("remove-selections");
 
 
 function getCookie(name) {
@@ -42,6 +43,30 @@ function addIntent(){
     .catch(error =>  console.error(error));
 }
 
+function loadIntents(){
+  const url = window.location.href;
+  const data = new FormData();
+  data.append('type', 'get-intents');
+
+  const csrftoken = getCookie('csrftoken');
+
+    fetch(url, {
+        method : 'POST',
+        headers : {
+            'X-CSRFToken' : csrftoken
+        },
+        body : data
+    })
+    .then(response => response.json())
+    .then(data => {
+      for(const intent of Object.entries(data.response)){
+        updateIntents(intent[1].intent);
+
+      }
+    })
+    .catch(error => console.error(error));
+}
+
 function updateIntents(question){
     var intentList = document.getElementById("intent-list");
     var intent = document.createElement("li");
@@ -65,6 +90,91 @@ function updateIntents(question){
 
     intentList.appendChild(intent);
 }
+
+
+function loadPublicIntents(){
+  const url = window.location.href;
+  const data = new FormData();
+  data.append('type', 'get-public-intents');
+
+  const csrftoken = getCookie('csrftoken');
+
+    fetch(url, {
+        method : 'POST',
+        headers : {
+            'X-CSRFToken' : csrftoken
+        },
+        body : data
+    })
+    .then(response => response.json())
+    .then(data => {
+      for(const intent of Object.entries(data.response)){
+        updatePublicIntent(intent[1].intent);
+      }
+    })
+    .catch(error => console.error(error));
+}
+
+function updatePublicIntent(question){
+  var intentList = document.getElementById("public-intent-list");
+  var intent = document.createElement("li");
+
+  var checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+
+  var span = document.createElement("span");
+  span.textContent = question;
+
+  var button = document.createElement("button");
+  button.classList.add("btn", "btn-primary", "btn-xs", "side-button", "edit");
+  button.style.fontFamily = "'Product Sans', sans-serif;";
+  button.type = "side";
+  button.textContent = "Edit";
+
+  intent.appendChild(checkbox);
+  intent.appendChild(span);
+  intent.appendChild(button);
+
+
+  intentList.appendChild(intent);
+}
+
+function deleteSelectedIntents(){
+  const myList = document.getElementById('intent-list');
+  const checkedItems = myList.querySelectorAll('li input[type="checkbox"]:checked');
+  if(checkedItems.length == 0){
+    return;
+  }
+  const url = window.location.href;
+  const data = new FormData();
+  data.append('type', 'delete-intent')
+
+
+  for(var i = 0; i < checkedItems.length; i++){
+    data.append(i, checkedItems[i].parentNode.querySelector("span").textContent);
+  }
+
+
+  const csrftoken = getCookie('csrftoken');
+
+  fetch(url, {
+      method : 'POST',
+      headers : {
+          'X-CSRFToken' : csrftoken
+      },
+      body : data
+  })
+  .then(response => response.json())
+  .then(data => {
+    for(var i = 0; i < checkedItems.length; i++){
+     checkedItems[i].parentNode.parentNode.removeChild(checkedItems[i].parentNode);
+    }
+  })
+  .catch(error => console.error(error));
+
+
+}
+
 
 function closeAddButtonWindow(){
     previewContainer.style.display = "none";
@@ -98,3 +208,10 @@ editCloseButton.addEventListener("click", () => {
 });
 
 addIntentButton.addEventListener("click", addIntent);
+
+removeSelectionsButton.addEventListener("click", deleteSelectedIntents);
+
+document.addEventListener('DOMContentLoaded', function(){
+  loadIntents();
+  loadPublicIntents();
+});

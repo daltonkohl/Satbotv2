@@ -5,11 +5,11 @@ name = "pypi"
 
 [packages]
 django = "*"
-torch = "*"
 django-debug-toolbar = "*"
 djangorestframework = "*"
 numpy = "*"
 nltk = "*"
+torch = "==2.0.0"
 
 [dev-packages]
 

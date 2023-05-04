@@ -177,9 +177,8 @@ def signup(request):
 
 
 def professor(request, id):
+    user = get_object_or_404(User, pk=id)
     if(request.method == 'GET'):
-        #user = get_object_or_404(User, pk=id)
-        #intents = Intent.objects.filter(professor = user)
         return render(request, 'professor.html')
     elif(request.method == 'POST'):
         if(request.POST.get('type') == 'add-intent'):
@@ -199,11 +198,33 @@ def professor(request, id):
                         separators=(',',': '))
             
 
-            new_intent = Intent(intent = question, response = answer)
+            new_intent = Intent(intent = question, response = answer, professor = user)
             new_intent.save()
             data = {'response': {'intent' : question}}
             train.train()
             return JsonResponse(data)
+        
+        elif(request.POST.get('type') == 'get-intents'):
+            intents = Intent.objects.filter(professor = user) 
+            intents = IntentSerializer(intents, many=True)
+            data = {"response": intents.data}
+            return JsonResponse(data)
+        
+        elif(request.POST.get('type') == 'get-public-intents'):
+            intents = Intent.objects.filter(intent_type = 'P')
+            intents = IntentSerializer(intents, many = True)
+            data = {"response": intents.data}
+            return JsonResponse(data)
+        
+        elif(request.POST.get('type') == 'delete-intent'):
+            for i in range(len(request.POST) - 1):
+                question = request.POST.get(str(i))
+                intent = Intent.objects.filter(professor = user, intent = question)
+                intent.delete()
+            data = {"response": "success"}
+            return JsonResponse(data)
+        
+
         
 
 
