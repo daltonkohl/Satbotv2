@@ -4,7 +4,7 @@ from .models import Chat, Course, IncompleteQuestion, Intent, User
 class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat
-        fields = ['user', 'text', 'timestamp', 'course']
+        fields = ['user', 'text', 'sender', 'timestamp', 'course']
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -24,7 +24,7 @@ class CourseSerializer(serializers.ModelSerializer):
 class IncompleteQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = IncompleteQuestion
-        fields = ['estimated_intent', 'chat_text']
+        fields = ['chat_text']
 
 class IntentSerializer(serializers.ModelSerializer):
     class Meta:

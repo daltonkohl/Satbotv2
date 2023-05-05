@@ -10,34 +10,40 @@ function getCookie(name) {
 
 
 
-function sendPostRequest(message){
+function sendPostRequest(message) {
   const url = window.location.href;
 
   const data = new FormData();
+  data.append('type', 'chat')
   data.append('chat', message);
 
   const csrftoken = getCookie('csrftoken');
 
   return fetch(url + "?" + JSON.stringify(data), {
-    method : 'POST',
+    method: 'POST',
     headers: {
       'X-CSRFToken': csrftoken
     },
     body: data
   })
-  .then(response => response.json())
-  .then(data => data.response)
-  .catch(error => console.error(error));
+    .then(response => response.json())
+    .then(data => data.response)
+    .catch(error => console.error(error));
 }
 
-function addUserMessage() {
-  const userMessage = input.value.trim();
-
-  var postResponse = ""
-  sendPostRequest(userMessage)
-    .then(response => {
-      postResponse = response
-    });
+function addUserMessage(post, inputMessage) {
+  var userMessage = ""
+  if (post) {
+    userMessage = input.value.trim();
+    var postResponse = ""
+    sendPostRequest(userMessage)
+      .then(response => {
+        postResponse = response;
+      });
+  }
+  else {
+    userMessage = inputMessage;
+  }
 
 
   if (!userMessage) return;
@@ -55,9 +61,40 @@ function addUserMessage() {
   input.value = '';
   input.focus();
 
-  setTimeout(() => {
-    addBotMessage(postResponse);
-   }, 1000);
+  if (post) {
+    setTimeout(() => {
+      addBotMessage(postResponse);
+    }, 1000);
+  }
+}
+
+function LoadChats() {
+  const url = window.location.href;
+
+  const data = new FormData();
+  data.append('type', 'load-chats');
+
+  const csrftoken = getCookie('csrftoken');
+
+  return fetch(url + "?" + JSON.stringify(data), {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': csrftoken
+    },
+    body: data
+  })
+    .then(response => response.json())
+    .then(data => {
+      for(const chat of Object.entries(data.response)){
+        if(chat[1].sender == 'U'){
+          addUserMessage(false, chat[1].text);
+        }
+        else{
+          addBotMessage(chat[1].text)
+        }
+      }
+    })
+    .catch(error => console.error(error));
 }
 
 function addBotMessage(responseMessage) {
@@ -87,9 +124,14 @@ function addBotMessage(responseMessage) {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
+
 sendBtn.addEventListener('click', addUserMessage);
 input.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    addUserMessage();
+    addUserMessage(true, "");
   }
+});
+
+document.addEventListener('DOMContentLoaded', function(){
+  LoadChats();
 });

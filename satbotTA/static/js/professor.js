@@ -37,7 +37,7 @@ function addIntent(){
     })
     .then(response => response.json())
     .then(data => {
-        updateIntents(data.response.intent);
+        updateIntents(data.response.intent, data.response.response);
     })
     .then(closeAddButtonWindow())
     .catch(error =>  console.error(error));
@@ -60,14 +60,13 @@ function loadIntents(){
     .then(response => response.json())
     .then(data => {
       for(const intent of Object.entries(data.response)){
-        updateIntents(intent[1].intent);
-
+        updateIntents(intent[1].intent, intent[1].response);
       }
     })
     .catch(error => console.error(error));
 }
 
-function updateIntents(question){
+function updateIntents(question, answer){
     var intentList = document.getElementById("intent-list");
     var intent = document.createElement("li");
 
@@ -75,7 +74,7 @@ function updateIntents(question){
     checkbox.type = "checkbox";
 
     var span = document.createElement("span");
-    span.textContent = question;
+    span.innerHTML = "<b>Q</b>: " + question + "<br><b>A</b>: " + answer;
 
     var button = document.createElement("button");
     button.classList.add("btn", "btn-primary", "btn-xs", "side-button", "edit");
@@ -115,6 +114,29 @@ function loadPublicIntents(){
     .catch(error => console.error(error));
 }
 
+function loadMissedQuestions(){
+  const url = window.location.href;
+  const data = new FormData();
+  data.append('type', 'load-missed-questions');
+
+  const csrftoken = getCookie('csrftoken');
+
+    fetch(url, {
+        method : 'POST',
+        headers : {
+            'X-CSRFToken' : csrftoken
+        },
+        body : data
+    })
+    .then(response => response.json())
+    .then(data => {
+      for(const intent of Object.entries(data.response)){
+        updateMissedQuestion(intent[1].chat_text);
+      }
+    })
+    .catch(error => console.error(error));
+}
+
 function updatePublicIntent(question){
   var intentList = document.getElementById("public-intent-list");
   var intent = document.createElement("li");
@@ -137,6 +159,30 @@ function updatePublicIntent(question){
 
 
   intentList.appendChild(intent);
+}
+
+function updateMissedQuestion(question){
+  var missedQuestionList = document.getElementById("missed-question-list");
+  var missedQuestion = document.createElement("li");
+
+  var checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+
+  var span = document.createElement("span");
+  span.textContent = question;
+
+  var button = document.createElement("button");
+  button.classList.add("btn", "btn-primary", "btn-xs", "side-button", "edit");
+  button.style.fontFamily = "'Product Sans', sans-serif;";
+  button.type = "side";
+  button.textContent = "Open Chat Preview";
+
+  missedQuestion.appendChild(checkbox);
+  missedQuestion.appendChild(span);
+  missedQuestion.appendChild(button);
+
+
+  missedQuestionList.appendChild(missedQuestion);
 }
 
 function deleteSelectedIntents(){
@@ -214,4 +260,5 @@ removeSelectionsButton.addEventListener("click", deleteSelectedIntents);
 document.addEventListener('DOMContentLoaded', function(){
   loadIntents();
   loadPublicIntents();
+  loadMissedQuestions();
 });

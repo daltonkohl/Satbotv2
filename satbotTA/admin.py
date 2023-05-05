@@ -6,7 +6,7 @@ from .models import User
 
 @admin.register(models.Chat)
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ['user', 'timestamp', 'course']
+    list_display = ['user', 'sender', 'timestamp', 'course']
     list_filter = ['timestamp']
     ordering = ['user', 'timestamp', 'course']
     search_fields = ['user__first_name_istartswith', 'user__last_name__istartswith', 'course__istartswith', 'text']
@@ -22,9 +22,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(models.IncompleteQuestion)
 class IncompleteQuestionAdmin(admin.ModelAdmin):
-    list_display = ['estimated_intent', 'chat_text']
-    ordering = ['estimated_intent']
-    search_fields = ['estimated_intent']
+    list_display = ['chat_text']
 
 
 @admin.register(models.Intent)

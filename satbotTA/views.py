@@ -162,15 +162,30 @@ def login(request):
 
 
 def chatscreen(request, id):
+    user = get_object_or_404(User, pk=id)
     if(request.method == 'GET'):
         return render(request, 'chatscreen.html')
     elif(request.method == 'POST'):
-        chat = request.POST.get('chat')
-        print(f"****************{chat}******************")
-        botResponse = bot.conversate(chat)
-        print(f"****************{botResponse}******************")
-        data = {'response': str(botResponse)}
-        return JsonResponse(data)
+        if(request.POST.get('type') == 'chat'):
+            chat = request.POST.get('chat')
+            bot_response = bot.conversate(chat)
+            new_user_chat = Chat(user = user, sender = 'U', text = chat)
+            new_user_chat.save()
+            if(not isinstance(bot_response, str)):
+                bot_response = "I do not understand..."
+                incomplete_question = IncompleteQuestion(chat_text = chat)
+                incomplete_question.save()
+            new_bot_chat = Chat(user = user, sender = 'B', text = bot_response)
+            new_bot_chat.save()
+            
+
+            data = {'response': str(bot_response)}
+            return JsonResponse(data)
+        elif(request.POST.get('type') == 'load-chats'):
+            chats = Chat.objects.filter(user = user)
+            chats = ChatSerializer(chats, many = True)
+            data = {'response': chats.data}
+            return JsonResponse(data)
 
 def signup(request):
     return render(request, 'signup.html')
@@ -200,7 +215,7 @@ def professor(request, id):
 
             new_intent = Intent(intent = question, response = answer, professor = user)
             new_intent.save()
-            data = {'response': {'intent' : question}}
+            data = {'response': {'intent' : question, 'response': answer}}
             train.train()
             return JsonResponse(data)
         
@@ -223,6 +238,13 @@ def professor(request, id):
                 intent.delete()
             data = {"response": "success"}
             return JsonResponse(data)
+        
+        elif(request.POST.get('type') == 'load-missed-questions'):
+            missed_questions = IncompleteQuestion.objects.all()
+            missed_questions = IncompleteQuestionSerializer(missed_questions, many = True)
+            data = {'response': missed_questions.data}
+            return JsonResponse(data)
+
         
 
         

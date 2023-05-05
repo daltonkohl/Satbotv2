@@ -60,4 +60,4 @@ def conversate(msg):
             if tag == keyword["tag"]:
                 return random.choice(keyword['responses']) # Return a random response from the list of responses
 
-    return "I do not understand..." # If under 75% probablility, print "I do not understand..."
+    return prob.item(),  # If under 75% probablility, print "I do not understand..."

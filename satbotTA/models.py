@@ -38,14 +38,12 @@ class Course(models.Model):
 
 class IncompleteQuestion(models.Model):
     #fields
-    estimated_intent = models.ForeignKey('Intent', on_delete=models.PROTECT, related_name='incomplete_questions')
+    #estimated_intent = models.ForeignKey('Intent', on_delete=models.PROTECT, related_name='incomplete_questions')
     chat_text = models.TextField()
 
     def __str__(self) -> str:
         return self.estimated_intent
     
-    class Meta:
-        ordering  = ['estimated_intent']
 
 class Intent(models.Model):
     #fields
