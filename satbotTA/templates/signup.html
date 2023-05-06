@@ -1,66 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
+
 <head>
     <meta charset="utf-8">
     <title>SatBot - Sign Up</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-iAL5FW5fX9uUMYtZB7V1BhJSjLSCov+zwOATyF7zyu0+8JdXVgIRN5If66V7b1EgNLjgx7B/2LO43bp03nAbnQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}" type="text/css">
 </head>
 <style>
-  .logo-img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      max-height: 80px;
-  }
+    .logo-img {
+        position: absolute;
+        top: 0;
+        right: 0;
+        max-height: 80px;
+    }
 </style>
-<body class="bg-light" >
-  <img src="{% static 'images/USDLogo.png' %}" alt="USD Logo" class="logo-img">
-  <div class="square-top-left"></div>
-  <div class="square-bottom-right"></div>
 
-<main class="container-fluid mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card p-4 rounded-lg shadow-sm">
-              <h2 class="text-center mb-4" style="font-family: 'Product Sans', sans-serif;">Create Your SatBot Account</h2>
-                <form>
+<body class="bg-light">
+    <button id="logout-btn" onclick="location.href = 'login.html'" class="btn btn-outline-primary mt-3"
+      style="font-family: 'Product Sans', sans-serif;">Log Out</button>
+    <img src="{% static 'images/USDLogo.png' %}" alt="USD Logo" class="logo-img">
+    <div class="square-top-left"></div>
+    <div class="square-bottom-right"></div>
+    <main class="container-fluid mt-5">
+      <div id="overlay"
+        style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;backdrop-filter: blur(8px);z-index:50;">
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <div class="card p-4 rounded-lg shadow-sm">
+            <h2 class="card-title text-center mb-4" style="font-family: 'Product Sans', sans-serif;">Create Your SatBot Account</h2>
+            <!-- Adding the tab content -->
+            <div class="row">
+              <div class="col-md-12">
+                <ul class="nav nav-pills">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#student" data-toggle="tab"
+                      style="font-family: 'Product Sans', sans-serif;">Student</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#professor" data-toggle="tab"
+                      style="font-family: 'Product Sans', sans-serif;">Professor</a>
+                  </li>
+                </ul>
+  
+                <div class="tab-content">
+  
+                    <div id="student" class="tab-pane active">
+                        <div class="form-group">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="firstname" name="firstname"
+                                placeholder="First Name"
+                                style="font-family: 'Product Sans', sans-serif;" required>
+                        </div>
 
-                    <div class="form-floating mb-3 py-8">
-                        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="First Name" style="font-family: 'Product Sans', sans-serif;" required>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="lastname" name="lastname"
+                                placeholder="Last Name" style="font-family: 'Product Sans', sans-serif;"
+                                required>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username" name="username"
+                                placeholder="Username" style="font-family: 'Product Sans', sans-serif;"
+                                required>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Password" style="font-family: 'Product Sans', sans-serif;"
+                                required>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" class="form-control" id="confirm-password"
+                                name="confirm-password" placeholder="Confirm Password"
+                                style="font-family: 'Product Sans', sans-serif;" required>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="classcode" name="classcode"
+                                placeholder="Enter Class Code"
+                                style="font-family: 'Product Sans', sans-serif;" required>
+                        </div>
+
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary flex-fill"
+                                style="font-family: 'Product Sans', sans-serif;">Create Account</button>
+                            <button type="back" class="btn btn-secondary flex-fill"
+                                onclick="location.href = '{% url 'login' %}'"
+                                style="font-family: 'Product Sans', sans-serif;">Back</button>
+                        </div>
+                        </div>
                     </div>
+  
+  
+                    <div id="professor" class="tab-pane">
+                        <div class="form-group">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="firstname" name="firstname"
+                                    placeholder="First Name"
+                                    style="font-family: 'Product Sans', sans-serif;" required>
+                            </div>
 
-                    <div class="form-floating mb-3 py-4">
-                        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Last Name" style="font-family: 'Product Sans', sans-serif;" required>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="lastname" name="lastname"
+                                    placeholder="Last Name" style="font-family: 'Product Sans', sans-serif;"
+                                    required>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="username" name="username"
+                                    placeholder="Username" style="font-family: 'Product Sans', sans-serif;"
+                                    required>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Password" style="font-family: 'Product Sans', sans-serif;"
+                                    required>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="confirm-password"
+                                    name="confirm-password" placeholder="Confirm Password"
+                                    style="font-family: 'Product Sans', sans-serif;" required>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="classcode" name="classcode"
+                                    placeholder="Create Class Code"
+                                    style="font-family: 'Product Sans', sans-serif;" required>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary flex-fill"
+                                    style="font-family: 'Product Sans', sans-serif;">Create Account</button>
+                                <button type="back" class="btn btn-secondary flex-fill"
+                                    onclick="location.href = '{% url 'login' %}'"
+                                    style="font-family: 'Product Sans', sans-serif;">Back</button>
+                            </div>
                     </div>
-
-                    <div class="form-floating mb-3 py-4">
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" style="font-family: 'Product Sans', sans-serif;" required>
-                    </div>
-
-                    <div class="form-floating mb-3 py-4">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" style="font-family: 'Product Sans', sans-serif;" required>
-                    </div>
-
-                    <div class="form-floating mb-3 py-4">
-                        <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Confirm Password" style="font-family: 'Product Sans', sans-serif;" required>
-                    </div>
-
-                    <div class="form-floating mb-3 py-4">
-                        <input type="text" class="form-control" id="classcode" name="classcode" placeholder="Class Code" style="font-family: 'Product Sans', sans-serif;" required>
-                    </div>
-
-                    <div class="d-flex justify-content-center">
-                      <button type="submit" class="btn btn-primary flex-fill" style="font-family: 'Product Sans', sans-serif;">Create Account</button>
-                      <button type="back" class="btn btn-secondary flex-fill" onclick="location.href = '{% url 'login' %}'" style="font-family: 'Product Sans', sans-serif;">Back</button>
-                    </div>
-                    
-
-                </form>
+  
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-</main>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-mZ1Iy+V7by8B4L4Y7yq+OZ5c5o5AS9ZGJzZVRkBTliEhJ//47R+SDa1yjK1vLGaWdJ8rSEzrKj3m2b
+      </div>
+      </div>
+    </main>
+  </html>
