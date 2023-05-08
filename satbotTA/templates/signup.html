@@ -59,43 +59,43 @@
                     <div id="student" class="tab-pane active">
                         <div class="form-group">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="firstname" name="firstname"
+                            <input type="text" class="form-control" id="student-firstname" name="firstname"
                                 placeholder="First Name"
                                 style="font-family: 'Product Sans', sans-serif;" required>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="lastname" name="lastname"
+                            <input type="text" class="form-control" id="student-lastname" name="lastname"
                                 placeholder="Last Name" style="font-family: 'Product Sans', sans-serif;"
                                 required>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="username" name="username"
+                            <input type="text" class="form-control" id="student-username" name="username"
                                 placeholder="Username" style="font-family: 'Product Sans', sans-serif;"
                                 required>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="password" name="password"
+                            <input type="password" class="form-control" id="student-password" name="password"
                                 placeholder="Password" style="font-family: 'Product Sans', sans-serif;"
                                 required>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="confirm-password"
+                            <input type="password" class="form-control" id="student-confirm-password"
                                 name="confirm-password" placeholder="Confirm Password"
                                 style="font-family: 'Product Sans', sans-serif;" required>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="classcode" name="classcode"
+                            <input type="text" class="form-control" id="student-classcode" name="classcode"
                                 placeholder="Enter Class Code"
                                 style="font-family: 'Product Sans', sans-serif;" required>
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary flex-fill"
+                            <button id = "student-button" type="button" class="btn btn-primary flex-fill"
                                 style="font-family: 'Product Sans', sans-serif;">Create Account</button>
                             <button type="back" class="btn btn-secondary flex-fill"
                                 onclick="location.href = '{% url 'login' %}'"
@@ -108,43 +108,49 @@
                     <div id="professor" class="tab-pane">
                         <div class="form-group">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="firstname" name="firstname"
+                                <input type="text" class="form-control" id="professor-firstname" name="firstname"
                                     placeholder="First Name"
                                     style="font-family: 'Product Sans', sans-serif;" required>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="lastname" name="lastname"
+                                <input type="text" class="form-control" id="professor-lastname" name="lastname"
                                     placeholder="Last Name" style="font-family: 'Product Sans', sans-serif;"
                                     required>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="username" name="username"
+                                <input type="text" class="form-control" id="professor-username" name="username"
                                     placeholder="Username" style="font-family: 'Product Sans', sans-serif;"
                                     required>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="password" name="password"
+                                <input type="password" class="form-control" id="professor-password" name="password"
                                     placeholder="Password" style="font-family: 'Product Sans', sans-serif;"
                                     required>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="confirm-password"
+                                <input type="password" class="form-control" id="professor-confirm-password"
                                     name="confirm-password" placeholder="Confirm Password"
                                     style="font-family: 'Product Sans', sans-serif;" required>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="classcode" name="classcode"
+                                <input type="text" class="form-control" id="professor-classname" name="classname"
+                                    placeholder="Create Class Name"
+                                    style="font-family: 'Product Sans', sans-serif;" required>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="professor-classcode" name="classcode"
                                     placeholder="Create Class Code"
                                     style="font-family: 'Product Sans', sans-serif;" required>
                             </div>
 
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary flex-fill"
+                                <button id = "professor-button" type="button" class="btn btn-primary flex-fill"
                                     style="font-family: 'Product Sans', sans-serif;">Create Account</button>
                                 <button type="back" class="btn btn-secondary flex-fill"
                                     onclick="location.href = '{% url 'login' %}'"
@@ -160,4 +166,5 @@
       </div>
       </div>
     </main>
+    <script src="{% static 'js/signup.js' %}"></script>
   </html>

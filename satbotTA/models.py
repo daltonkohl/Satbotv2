@@ -27,6 +27,7 @@ class Chat(models.Model):
 class Course(models.Model):
     #fields
     course_title = models.CharField(max_length=255)
+    course_code = models.CharField(max_length=255, default="1")
     instructor = models.ForeignKey('User', on_delete=models.PROTECT, related_name='instructors')
 
 

@@ -187,8 +187,6 @@ def chatscreen(request, id):
             data = {'response': chats.data}
             return JsonResponse(data)
 
-def signup(request):
-    return render(request, 'signup.html')
 
 
 def professor(request, id):
@@ -244,7 +242,48 @@ def professor(request, id):
             missed_questions = IncompleteQuestionSerializer(missed_questions, many = True)
             data = {'response': missed_questions.data}
             return JsonResponse(data)
+        
+def signup(request):
+    if(request.method == 'GET'):
+        return render(request, 'signup.html')
 
+    elif(request.method == 'POST'):
+        if(request.POST.get('type') == 'create-student'):
+            user = User.objects.filter(email = request.POST.get('username'))
+            if(user.exists()):
+                return JsonResponse({'response': 'username already exists'})
+            else:
+                firstname = request.POST.get('firstname')
+                lastname = request.POST.get('lastname')
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+                classcode = request.POST.get('classcode')
+                course = Course.objects.filter(course_code = classcode)
+                if(not course.exists()):
+                    return JsonResponse({'response': 'class code does not exist'})
+                user = User(first_name = firstname, last_name = lastname, email = username, password = password, user_type = 'S')
+                user.save()
+                return redirect(f'/satbotTA/login')
+
+        elif(request.POST.get('type') == 'create-professor'):
+            user = User.objects.filter(email = request.POST.get('username'))
+            if(user.exists()):
+                return JsonResponse({'response': 'username already exists'})
+            else:
+                firstname = request.POST.get('firstname')
+                lastname = request.POST.get('lastname')
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+                classname = request.POST.get('classname')
+                classcode = request.POST.get('classcode')
+                course = Course.objects.filter(course_code = classcode)
+                if(course.exists()):
+                    return JsonResponse({'response': 'class code already does exist'})
+                user = User(first_name = firstname, last_name = lastname, email = username, password = password, user_type = 'P')
+                user.save()
+                course = Course(course_title = classname, course_code = classcode, instructor = user)
+                course.save()
+                return redirect(f'/satbotTA/login')
         
 
         
