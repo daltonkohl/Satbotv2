@@ -160,6 +160,18 @@
   .logout-bottom-left:hover {
     background-color: lightblue;
   }
+
+  .nav-pills .nav-link {
+    transition: all 0.3s ease;
+  }
+
+  .nav-pills .nav-link.active {
+    background-color: whitesmoke;
+    /* Change this color as per your requirement */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-color: whitesmoke;
+    /* Adjust this color according to your active background color */
+  }
 </style>
 
 <body class="bg-light">
@@ -210,8 +222,8 @@
                     <button id="add-new-entry" class="btn btn-primary mr-2 top-button"
                       style="font-family: 'Product Sans', sans-serif;" type="top-submit">Add New
                       Entry</button>
-                    <button id="remove-selections" class="btn btn-danger top-button" style="font-family: 'Product Sans', sans-serif;"
-                      type="top-back">Remove
+                    <button id="remove-selections" class="btn btn-danger top-button"
+                      style="font-family: 'Product Sans', sans-serif;" type="top-back">Remove
                       Selection(s)</button>
                   </div>
                   <div class="scroll-window">
@@ -229,7 +241,7 @@
                       Selection(s)</button>
                   </div>
                   <div class="scroll-window">
-                    <ul id = missed-question-list>
+                    <ul id=missed-question-list>
                       <!-- Add the rest of the items in the same format -->
 
                     </ul>
@@ -258,7 +270,8 @@
                 <div id="classlist" class="tab-pane container">
                   <div class="scroll-window">
                     <ul>
-                      <li>
+                      <!--
+                        <li>
                         <span>Andrew Kirrane</span>
                         <button class="btn btn-primary btn-xs side-button" onclick="location.href = 'chatPreview.html'"
                           style="font-family: 'Product Sans', sans-serif;" type="side">View
@@ -281,7 +294,8 @@
                         <button class="btn btn-primary btn-xs side-button" onclick="location.href = 'chatPreview.html'"
                           style="font-family: 'Product Sans', sans-serif;" type="side">View
                           Chats</button>
-                      </li>
+                      </li> 
+                    -->
                       <!-- Add the rest of the items in the same format -->
 
                     </ul>
@@ -316,4 +330,5 @@
   </main>
 
   <script src="{% static 'js/professor.js' %}"></script>
+
 </html>

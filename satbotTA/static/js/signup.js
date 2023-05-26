@@ -1,12 +1,14 @@
+// Retrieving buttons from the DOM
 studentButton = document.getElementById("student-button");
 professorButton = document.getElementById("professor-button");
 
+// function to retrieve a cookie by its name
 function getCookie(name) {
-    // function to retrieve a cookie by its name
     const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
     return cookieValue ? cookieValue[2] : null;
 }
 
+// Function to create a student entity
 function createStudent(){
     var firstname = document.getElementById("student-firstname").value.trim();
     var lastname = document.getElementById("student-lastname").value.trim();
@@ -66,7 +68,7 @@ function createStudent(){
 
 }
 
-
+// Function to create a professor entity
 function createProfessor(){
     var firstname = document.getElementById("professor-firstname").value.trim();
     var lastname = document.getElementById("professor-lastname").value.trim();
@@ -128,5 +130,6 @@ function createProfessor(){
 
 }
 
+// Adding event listeners to the buttons
 studentButton.addEventListener('click', createStudent);
 professorButton.addEventListener('click', createProfessor);

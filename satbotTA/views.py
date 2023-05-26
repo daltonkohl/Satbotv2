@@ -9,44 +9,42 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Chat, Course, IncompleteQuestion, Intent, User
 from .serializers import ChatSerializer, CourseSerializer, IncompleteQuestionSerializer, IntentSerializer, UserSerializer
-from .NN import bot
-from .NN import train
+from .NN import bot  # Bot from Neural Network 
+from .NN import train  # Training function for Neural Network
 
+# Views for the Django application
 
+class ChatListViewSet(ModelViewSet):  # ViewSet for Chat Model
+    queryset = Chat.objects.all()  # Fetch all Chat objects
+    serializer_class = ChatSerializer  # Use ChatSerializer
 
-# Create your views here.
-
-
-class ChatListViewSet(ModelViewSet):
-    queryset = Chat.objects.all()
-    serializer_class = ChatSerializer
-
-    def get_serializer_context(self):
+    def get_serializer_context(self):  # Provide additional context for the serializer
         return {'request': self.request}
 
-@api_view(['GET'])
-def chat_list(request):
-    if request.method == 'GET':
-        queryset = Chat.objects.all()
-        serializer = ChatSerializer(queryset, many=True, context = {'request': request})
-        return Response(serializer.data)
+@api_view(['GET'])  # Allow only GET requests
+def chat_list(request):  # View for listing all chats
+    if request.method == 'GET':  
+        queryset = Chat.objects.all()  # Fetch all chats
+        serializer = ChatSerializer(queryset, many=True, context = {'request': request})  # Serialize data
+        return Response(serializer.data)  # Return serialized data
     
 
-@api_view(['GET'])
-def chat_detail(request, id):
-    chat = get_object_or_404(Chat, pk=id)
-    if request.method == 'GET':
-        serializer = ChatSerializer(chat)
-        return Response(serializer.data)   
+@api_view(['GET'])  # Allow only GET requests
+def chat_detail(request, id):  # View for displaying specific chat detail
+    chat = get_object_or_404(Chat, pk=id)  # Fetch chat or return 404 if not found
+    if request.method == 'GET':  
+        serializer = ChatSerializer(chat)  # Serialize data
+        return Response(serializer.data)  # Return serialized data
     
 
-class CourseViewSet(ModelViewSet):
-    queryset = Course.objects.all()
-    serializer_class = CourseSerializer 
+class CourseViewSet(ModelViewSet):  # ViewSet for Course Model
+    queryset = Course.objects.all()  # Fetch all Course objects
+    serializer_class = CourseSerializer  # Use CourseSerializer 
 
-    def get_serializer_context(self):
+    def get_serializer_context(self):  # Provide additional context for the serializer
         return {'request': self.request}
 
+# The idea is the same for the remaining API views
 
 @api_view(['GET'])
 def course_list(request):
@@ -138,6 +136,8 @@ def user_detail(request, id):
         pass
 
 
+# View for handling user login
+# Code here handles the GET request to render the login page and the POST request to validate user credentials and redirect based on user type
 def login(request):
 
     if(request.method == 'GET'):
@@ -159,8 +159,8 @@ def login(request):
     return HttpResponse("Method was not allowed", status = status.HTTP_405_METHOD_NOT_ALLOWED)
    
 
-
-
+# View for handling chat screen
+# Code here handles the GET request to render the chat screen and POST request to handle chat message and bot's response
 def chatscreen(request, id):
     user = get_object_or_404(User, pk=id)
     if(request.method == 'GET'):
@@ -187,8 +187,8 @@ def chatscreen(request, id):
             data = {'response': chats.data}
             return JsonResponse(data)
 
-
-
+# View for handling professor functions
+# Code here handles the GET request to render the professor page and POST request to handle various operations (add intent, get intents, delete intent, load missed questions)
 def professor(request, id):
     user = get_object_or_404(User, pk=id)
     if(request.method == 'GET'):
@@ -242,7 +242,9 @@ def professor(request, id):
             missed_questions = IncompleteQuestionSerializer(missed_questions, many = True)
             data = {'response': missed_questions.data}
             return JsonResponse(data)
-        
+
+# View for handling user signup
+# Code here handles the GET request to render the signup page and POST request to create new student or professor user and course (for professor)    
 def signup(request):
     if(request.method == 'GET'):
         return render(request, 'signup.html')
@@ -284,9 +286,3 @@ def signup(request):
                 course = Course(course_title = classname, course_code = classcode, instructor = user)
                 course.save()
                 return redirect(f'/satbotTA/login')
-        
-
-        
-
-
-

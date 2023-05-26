@@ -53,11 +53,11 @@ def conversate(msg):
     probs = torch.softmax(output, dim = 1)
     prob = probs[0][prediction.item()] 
     print(prob.item())
-    if prob.item() > 0.75: # Threshold of 75%, else bot does not understand
+    if prob.item() > 0.80: # Threshold of 80%, else bot does not understand
         # For tag in data dictionary
         for keyword in data["data"]:
             # If tag matches predicted tag
             if tag == keyword["tag"]:
                 return random.choice(keyword['responses']) # Return a random response from the list of responses
 
-    return prob.item(),  # If under 75% probablility, print "I do not understand..."
+    return prob.item(),  # If under 80% probablility, print "I do not understand..."

@@ -1,15 +1,16 @@
+// This block of code retrieves HTML elements by their IDs or classes
 const chatContainer = document.getElementById('chat-container');
 const input = document.querySelector('input[type="text"]');
 const sendBtn = document.getElementById('send-btn');
 
+// Function to retrieve a cookie by its name
 function getCookie(name) {
-  // function to retrieve a cookie by its name
   const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
   return cookieValue ? cookieValue[2] : null;
 }
 
 
-
+// This function sends a POST request with the message data to the server
 function sendPostRequest(message) {
   const url = window.location.href;
 
@@ -31,6 +32,7 @@ function sendPostRequest(message) {
     .catch(error => console.error(error));
 }
 
+// This function adds a new message from the user to the chat container
 function addUserMessage(post, inputMessage) {
   var userMessage = ""
   if (post) {
@@ -68,6 +70,7 @@ function addUserMessage(post, inputMessage) {
   }
 }
 
+// This function loads existing chats from the server when the page loads
 function LoadChats() {
   const url = window.location.href;
 
@@ -97,19 +100,9 @@ function LoadChats() {
     .catch(error => console.error(error));
 }
 
+// This function adds a new message from the bot to the chat container
 function addBotMessage(responseMessage) {
-  /*
-  const botMessages = [
-    'Hi there! How can I help you today?',
-    'What kind of problem are you having?',
-    'I\'m sorry to hear that. Let me see if I can assist you.'
-  ];
-
-  const randomIndex = Math.floor(Math.random() * botMessages.length);
-  const botMessage = botMessages[randomIndex];
-  */
   const botMessage = responseMessage
-
 
   const messageContainer = document.createElement('div');
   messageContainer.classList.add('message-container');
@@ -124,7 +117,7 @@ function addBotMessage(responseMessage) {
   chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-
+// These lines of code add event listeners to the send button and the input field
 sendBtn.addEventListener('click', addUserMessage);
 input.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
@@ -132,6 +125,7 @@ input.addEventListener('keydown', (event) => {
   }
 });
 
+// This line of code loads the existing chats when the page loads
 document.addEventListener('DOMContentLoaded', function(){
   LoadChats();
 });

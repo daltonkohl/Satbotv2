@@ -1,3 +1,4 @@
+// Retrieving HTML elements by their IDs
 const addNewEntryButton = document.getElementById("add-new-entry");
 const addCloseButton = document.getElementById("close-button");
 const previewContainer = document.getElementById("preview-container");
@@ -9,13 +10,13 @@ const editContainer = document.getElementById("edit-container");
 const editCloseButton = document.getElementById("edit-close-button");
 const removeSelectionsButton = document.getElementById("remove-selections");
 
-
+// function to retrieve a cookie by its name
 function getCookie(name) {
-    // function to retrieve a cookie by its name
     const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
     return cookieValue ? cookieValue[2] : null;
 }
 
+// This function adds a new intent 
 function addIntent(){
     var question = document.getElementById('add-question-textbox').value.trim();
     var answer = document.getElementById('add-answer-textbox').value.trim();
@@ -43,6 +44,7 @@ function addIntent(){
     .catch(error =>  console.error(error));
 }
 
+// This function loads existing intents
 function loadIntents(){
   const url = window.location.href;
   const data = new FormData();
@@ -66,6 +68,7 @@ function loadIntents(){
     .catch(error => console.error(error));
 }
 
+// This function updates the intents displayed in the UI
 function updateIntents(question, answer){
     var intentList = document.getElementById("intent-list");
     var intent = document.createElement("li");
@@ -90,7 +93,7 @@ function updateIntents(question, answer){
     intentList.appendChild(intent);
 }
 
-
+// This function loads the public intents into the UI
 function loadPublicIntents(){
   const url = window.location.href;
   const data = new FormData();
@@ -114,6 +117,7 @@ function loadPublicIntents(){
     .catch(error => console.error(error));
 }
 
+// This function loads the missed questions into the UI
 function loadMissedQuestions(){
   const url = window.location.href;
   const data = new FormData();
@@ -137,6 +141,7 @@ function loadMissedQuestions(){
     .catch(error => console.error(error));
 }
 
+// This function updates the public intents displayed in the UI
 function updatePublicIntent(question){
   var intentList = document.getElementById("public-intent-list");
   var intent = document.createElement("li");
@@ -161,6 +166,7 @@ function updatePublicIntent(question){
   intentList.appendChild(intent);
 }
 
+// This function updates the missed questions displayed in the UI
 function updateMissedQuestion(question){
   var missedQuestionList = document.getElementById("missed-question-list");
   var missedQuestion = document.createElement("li");
@@ -185,6 +191,7 @@ function updateMissedQuestion(question){
   missedQuestionList.appendChild(missedQuestion);
 }
 
+// This function deletes selected intents
 function deleteSelectedIntents(){
   const myList = document.getElementById('intent-list');
   const checkedItems = myList.querySelectorAll('li input[type="checkbox"]:checked');
@@ -221,14 +228,13 @@ function deleteSelectedIntents(){
 
 }
 
-
+// This function closes the preview container and removes the blur effect
 function closeAddButtonWindow(){
     previewContainer.style.display = "none";
     overlay.style.display = "none";
 }
 
-
-
+// Adding event listeners to buttons for different actions
 addNewEntryButton.addEventListener("click", () => {
   previewContainer.style.display = "block";
   overlay.style.display = "block";
@@ -257,6 +263,7 @@ addIntentButton.addEventListener("click", addIntent);
 
 removeSelectionsButton.addEventListener("click", deleteSelectedIntents);
 
+// Runs functions once page is loaded
 document.addEventListener('DOMContentLoaded', function(){
   loadIntents();
   loadPublicIntents();
